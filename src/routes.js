@@ -14,6 +14,7 @@ import App from './components/App';
 import ContentPage from './components/ContentPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
+import DashboardPage from './components/DashboardPage';
 
 const routes = [
   require('./routes/home'),
@@ -26,6 +27,12 @@ const router = new Router(on => {
   on('*', async (state, next) => {
     const component = await next();
     return component && <App context={state.context}>{component}</App>;
+  });
+
+  on('/dashboard', async ({context}) => {
+    context.onSetTitle('Sonic');
+
+    return <DashboardPage />
   });
 
   routes.forEach(route => {

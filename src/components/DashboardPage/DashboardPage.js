@@ -12,9 +12,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './DashboardPage.scss';
 import FontAwesome from 'react-fontawesome';
 import { Line, Circle } from 'rc-progress';
+import {ListGroup, ListGroupItem, Col} from 'react-bootstrap';
 
 function ProjectItem({item}) {
   item = {
+    id: item,
     name: 'company/project-awesome',
     lastVersion: '1.2.3-beta',
     rollout: 35,
@@ -22,7 +24,7 @@ function ProjectItem({item}) {
   };
 
   return (
-    <div style={{margin: 10}}>
+    <ListGroupItem href={`/projects/${item.id}`}>
       <table><tbody>
         <tr>
           <td><FontAwesome name="github"/> <span style={{align:'right'}}>{item.name}</span></td>
@@ -34,7 +36,7 @@ function ProjectItem({item}) {
           <td><Line percent={item.rollout} strokeWidth="4" strokeColor="#1347AE"/></td>
         </tr>
       </tbody></table>
-    </div>
+    </ListGroupItem>
   );
 }
 
@@ -42,24 +44,24 @@ function ProjectList () {
   const projects = [1,2,3,4];
 
   return (
-    <div>
+    <ListGroup>
       {projects.map(itm =>
         <ProjectItem item={itm}/>
       )}
-    </div>
+    </ListGroup>
   );
 }
 
 function DashboardPage({children}) {
   return (
     <div className={s.root}>
-      <div className={s.container}>
-        <div>
+      <div>
+        <Col md={4}>
           <ProjectList/>
-        </div>
-        <div>
+        </Col>
+        <Col md={8}>
           {children && {...children}}
-        </div>
+        </Col>
       </div>
     </div>
   );

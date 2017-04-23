@@ -15,6 +15,7 @@ import ContentPage from './components/ContentPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import DashboardPage from './components/DashboardPage';
+import {ApolloProvider} from 'react-apollo';
 
 const routes = [
   require('./routes/home'),
@@ -23,37 +24,43 @@ const routes = [
 ];
 
 const router = new Router(on => {
-  on('*', async (state, next) => {
+  on('*', async(state, next) => {
     const component = await next();
-    return component && <App context={state.context}>{component}</App>;
+    return component &&
+      <ApolloProvider client={state.context.client}>
+        <App context={state.context}>
+          {component}
+        </App>
+      </ApolloProvider>
+      ;
   });
 
-  on('/', async ({context}) => {
+  on('/', async({context}) => {
     context.onSetTitle('Sonic');
 
     return <DashboardPage />
   });
 
-  on('/projects/:id', async ({context, params}) => {
+  on('/projects/:id', async({context, params}) => {
     context.onSetTitle('Sonic');
 
-    return <DashboardPage projectId={params.id} />
+    return <DashboardPage projectId={params.id}/>
   });
 
-  on('/projects/:id/:tab', async ({context, params}) => {
+  on('/projects/:id/:tab', async({context, params}) => {
     context.onSetTitle('Sonic');
 
-    return <DashboardPage projectId={params.id} selectedTab={params.tab} />
+    return <DashboardPage projectId={params.id} selectedTab={params.tab}/>
   });
 
   routes.forEach(route => {
     on(route.path, route.action);
   });
 
-  on('*', async (state) => {
+  on('*', async(state) => {
     const query = `/graphql?query={content(path:"${state.path}"){path,title,content,component}}`;
     const response = await fetch(query);
-    const { data } = await response.json();
+    const {data} = await response.json();
     return data && data.content && <ContentPage {...data.content} />;
   });
 

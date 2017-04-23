@@ -16,6 +16,7 @@ import expressJwt from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
+import React from 'react';
 import PrettyError from 'pretty-error';
 import passport from './core/passport';
 import schema from './data/schema';
@@ -23,6 +24,7 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics, databaseUrl } from './config';
 import mongoose from 'mongoose';
+import {ApolloClient, ApolloProvider} from 'react-apollo';
 
 mongoose.connect(databaseUrl);
 
@@ -108,8 +110,14 @@ server.get('*', async (req, res, next) => {
       data.trackingId = analytics.google.trackingId;
     }
 
+    const client = new ApolloClient({
+      ssrMode: true,
+
+    });
+
     const css = [];
     const context = {
+      client: client,
       insertCss: styles => css.push(styles._getCss()),
       onSetTitle: value => (data.title = value),
       onSetMeta: (key, value) => (data[key] = value),

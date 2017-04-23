@@ -10,19 +10,42 @@
 import {
   GraphQLSchema as Schema,
   GraphQLObjectType as ObjectType,
+  GraphQLList as ListType,
 } from 'graphql';
+import {
+  UserType,
+  ProjectType,
+  DeploymentType,
+  DeviceType,
+} from './types';
 
-import me from './queries/me';
-import content from './queries/content';
-import news from './queries/news';
+const me = {
+  type: UserType,
+  resolve({ request }) {
+    console.log("demo: " + JSON.stringify(request.user));
+
+    return request.user && {
+        id: request.user._id,
+        fullName: request.user.fullName,
+        pic: request.user.pic,
+        //json: JSON.stringify(request.user),
+      };
+  },
+};
+
+const projects = {
+  type: new ListType(ProjectType),
+  resolve({ request }) {
+
+  }
+};
 
 const schema = new Schema({
   query: new ObjectType({
     name: 'Query',
     fields: {
       me,
-      content,
-      news,
+      projects
     },
   }),
 });

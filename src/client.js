@@ -9,10 +9,16 @@
 
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
+import React from 'react';
 import FastClick from 'fastclick';
 import Router from './routes';
 import Location from './core/Location';
-import { addEventListener, removeEventListener } from './core/DOMUtils';
+import {addEventListener, removeEventListener} from './core/DOMUtils';
+import {ApolloClient, ApolloProvider} from 'react-apollo';
+
+const client = new ApolloClient({
+  connectToDevTools: true
+});
 
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
@@ -35,6 +41,7 @@ const context = {
       .getElementsByTagName('head')[0]
       .appendChild(meta);
   },
+  client
 };
 
 // Google Analytics tracking. Don't send 'pageview' event after the first
@@ -43,24 +50,25 @@ let trackPageview = () => (trackPageview = () => window.ga('send', 'pageview'));
 
 function render(state) {
   Router.dispatch(state, (newState, component) => {
-    ReactDOM.render(component, appContainer, () => {
+    ReactDOM.render( component, appContainer,
+      () => {
 
-      // Restore the scroll position if it was saved into the state
-      if (state.scrollY !== undefined) {
-        window.scrollTo(state.scrollX, state.scrollY);
-      } else {
-        window.scrollTo(0, 0);
-      }
+        // Restore the scroll position if it was saved into the state
+        if (state.scrollY !== undefined) {
+          window.scrollTo(state.scrollX, state.scrollY);
+        } else {
+          window.scrollTo(0, 0);
+        }
 
-      trackPageview();
+        trackPageview();
 
-      // Remove the pre-rendered CSS because it's no longer used
-      // after the React app is launched
-      if (cssContainer) {
-        cssContainer.parentNode.removeChild(cssContainer);
-        cssContainer = null;
-      }
-    });
+        // Remove the pre-rendered CSS because it's no longer used
+        // after the React app is launched
+        if (cssContainer) {
+          cssContainer.parentNode.removeChild(cssContainer);
+          cssContainer = null;
+        }
+      });
   });
 }
 

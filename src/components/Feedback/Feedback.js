@@ -17,12 +17,12 @@ function Feedback() {
       <div className={s.container}>
         <a
           className={s.link}
-          href="https://gitter.im/kriasoft/react-starter-kit"
+          href="https://gitter.im/SonicMobileDeployment"
         >Ask a question</a>
         <span className={s.spacer}>|</span>
         <a
           className={s.link}
-          href="https://github.com/kriasoft/react-starter-kit/issues/new"
+          href="https://github.com/reicheltp/Sonic/issues/new"
         >Report an issue</a>
       </div>
     </div>

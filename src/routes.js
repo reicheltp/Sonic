@@ -19,8 +19,7 @@ import DashboardPage from './components/DashboardPage';
 const routes = [
   require('./routes/home'),
   require('./routes/contact'),
-  require('./routes/login'),
-  require('./routes/register'),
+  require('./routes/signin'),
 ];
 
 const router = new Router(on => {

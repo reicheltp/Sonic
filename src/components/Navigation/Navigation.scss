@@ -7,6 +7,8 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+$brand-color: #000080;
+
 .root {
 
 }
@@ -21,11 +23,11 @@
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, .6);
+  color: color($brand-color lightness(+10%));
 }
 
 .link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: color($brand-color lightness(-10%));
 }
 
 .highlight {
@@ -33,7 +35,7 @@
   margin-left: 8px;
   border-radius: 3px;
   background: rgba(0, 0, 0, .15);
-  color: #fff;
+  color: color($brand-color lightness(+10%));
 }
 
 .highlight:hover {
@@ -41,5 +43,5 @@
 }
 
 .spacer {
-  color: rgba(255, 255, 255, .3);
+  color: color($brand-color lightness(+10%));
 }

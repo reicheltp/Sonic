@@ -9,9 +9,9 @@
 
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Register.scss';
+import s from './Signin.scss';
 
-function Register({ title }) {
+function Signin({ title }) {
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -22,6 +22,6 @@ function Register({ title }) {
   );
 }
 
-Register.propTypes = { title: PropTypes.string.isRequired };
+Signin.propTypes = { title: PropTypes.string.isRequired };
 
-export default withStyles(Register, s);
+export default withStyles(Signin, s);

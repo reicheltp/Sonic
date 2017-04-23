@@ -9,7 +9,7 @@
 
 @import '../variables.scss';
 
-$brand-color: #000080;
+$brand-color: #1347AE;
 
 .root {
   background: #e6e6e6;
@@ -23,7 +23,7 @@ $brand-color: #000080;
 }
 
 .brand {
-  color: color($brand-color lightness(+15%));
+  color: $brand-color;
   text-decoration: none;
   font-size: 1.75em; /* ~28px */
 }

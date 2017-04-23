@@ -12,7 +12,7 @@ import Signin from './Signin';
 
 export const path = '/signin';
 export const action = async (state) => {
-  const title = 'Log In';
+  const title = 'Sign In';
   state.context.onSetTitle(title);
   return <Signin title={title} />;
 };

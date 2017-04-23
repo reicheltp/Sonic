@@ -55,9 +55,11 @@ class App extends Component {
 
   render() {
     return !this.props.error ? (
-      <div>
+      <div style={{display:'flex', flexDirection:'column', justifyContent:'flex-end', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}>
         <Header />
-        {this.props.children}
+        <div style={{flex:1}}>
+          {this.props.children}
+        </div>
         <Feedback />
         <Footer />
       </div>

@@ -34,6 +34,18 @@ const router = new Router(on => {
     return <DashboardPage />
   });
 
+  on('/projects/:id', async ({context, params}) => {
+    context.onSetTitle('Sonic');
+
+    return <DashboardPage projectId={params.id} />
+  });
+
+  on('/projects/:id/:tab', async ({context, params}) => {
+    context.onSetTitle('Sonic');
+
+    return <DashboardPage projectId={params.id} selectedTab={params.tab} />
+  });
+
   routes.forEach(route => {
     on(route.path, route.action);
   });

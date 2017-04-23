@@ -21,7 +21,10 @@ import passport from './core/passport';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
-import { port, auth, analytics } from './config';
+import { port, auth, analytics, databaseUrl } from './config';
+import mongoose from 'mongoose';
+
+mongoose.connect(databaseUrl);
 
 const server = global.server = express();
 
@@ -51,20 +54,37 @@ server.use(expressJwt({
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 }));
 server.use(passport.initialize());
+//server.use(passport.session());
 
-server.get('/login/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
-);
-server.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-  (req, res) => {
+passport.serializeUser((user, done) =>{
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) =>{
+  User.findById(id, function(err, user) {
+    console.log("deserialized user: " + user._id);
+    done(err, user);
+  });
+});
+
+server.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+server.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+server.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
     const expiresIn = 60 * 60 * 24 * 180; // 180 days
-    const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+    console.log("create token: " + req.user);
+    const token = jwt.sign(req.user.toObject(), auth.jwt.secret, { expiresIn });
     res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
     res.redirect('/');
-  }
-);
-
+  });
 //
 // Register API middleware
 // -----------------------------------------------------------------------------

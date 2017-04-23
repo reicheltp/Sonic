@@ -19,7 +19,8 @@ function Navigation({ className }) {
       <Link className={s.link} to="/about">About</Link>
       <Link className={s.link} to="/contact">Contact</Link>
       <span className={s.spacer}> | </span>
-      <Link className={cx(s.link, s.highlight)} to="/signin">Sign in with Github</Link>
+
+      <Link className={cx(s.link, s.highlight)} to="/auth/github">Sign in with Github</Link>
     </div>
   );
 }

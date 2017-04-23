@@ -18,7 +18,9 @@ const UserType = new ObjectType({
   name: 'User',
   fields: {
     id: { type: new NonNull(ID) },
-    email: { type: StringType },
+    fullName: { type: StringType },
+    pic: { type: StringType },
+    json: {type:StringType},
   },
 });
 

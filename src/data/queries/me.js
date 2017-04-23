@@ -12,9 +12,13 @@ import UserType from '../types/UserType';
 const me = {
   type: UserType,
   resolve({ request }) {
+    console.log("demo: " + JSON.stringify(request.user));
+
     return request.user && {
-      id: request.user.id,
-      email: request.user.email,
+      id: request.user._id,
+      fullName: request.user.fullName,
+      pic: request.user.pic,
+      json: JSON.stringify(request.user),
     };
   },
 };

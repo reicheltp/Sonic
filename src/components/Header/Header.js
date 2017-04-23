@@ -22,10 +22,6 @@ function Header() {
           <img src={require('./sonic-deployment-system.png')} width="45" height="38" alt="React" />
           <span className={s.brandTxt}>Sonic Mobile Deployment</span>
         </Link>
-        <div className={s.banner}>
-          <h1 className={s.bannerTitle}>Sonic</h1>
-          <p className={s.bannerDesc}>Mobile Deployment made easy and fast</p>
-        </div>
       </div>
     </div>
   );

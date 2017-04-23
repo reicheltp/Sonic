@@ -8,11 +8,11 @@
  */
 
 import React from 'react';
-import Register from './Register';
+import Signin from './Signin';
 
-export const path = '/register';
+export const path = '/signin';
 export const action = async (state) => {
-  const title = 'New User Registration';
+  const title = 'Log In';
   state.context.onSetTitle(title);
-  return <Register title={title} />;
+  return <Signin title={title} />;
 };

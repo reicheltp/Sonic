@@ -16,7 +16,18 @@ function Contact({ title }) {
     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-        <p>...</p>
+        <h3>
+          <a
+            className={s.link}
+            href="https://github.com/reicheltp/Sonic"
+          >Check out our project on Github</a>
+        </h3>
+        <h3>
+          <a
+            className={s.link}
+            href="https://gitter.im/SonicMobileDeployment"
+          >Contact us via Gitter</a>
+        </h3>
       </div>
     </div>
   );

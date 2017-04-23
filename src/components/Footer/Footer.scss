@@ -9,9 +9,11 @@
 
 @import '../variables.scss';
 
+$brand-color: #1347AE;
+
 .root {
-  background: #333;
-  color: #fff;
+  background: $brand-color;
+  color: color($brand-color lightness(50%));
 }
 
 .container {

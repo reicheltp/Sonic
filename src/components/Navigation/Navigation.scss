@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-$brand-color: #000080;
+$brand-color: #1347AE;
 
 .root {
 
@@ -23,7 +23,7 @@ $brand-color: #000080;
 .link,
 .link:active,
 .link:visited {
-  color: color($brand-color lightness(+10%));
+  color: $brand-color;
 }
 
 .link:hover {
@@ -43,5 +43,5 @@ $brand-color: #000080;
 }
 
 .spacer {
-  color: color($brand-color lightness(+10%));
+  color: $brand-color;
 }

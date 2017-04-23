@@ -31,19 +31,9 @@ function ProjectItem({item}) {
 
   return (
     <ListGroupItem href={`/projects/${item.id}`} key={item.id}>
-      <table style={{width:'100%'}}>
-        <tbody>
-        <tr>
-          <td><FontAwesome name="github"/> <span style={{align:'right'}}>{item.name}</span></td>
-        </tr>
-        <tr>
-          <td><FontAwesome name="code-fork"/> <span style={{align:'right'}}>{item.lastVersion}</span></td>
-        </tr>
-        <tr>
-          <td><Line percent={item.rollout} strokeWidth="4" strokeColor="#1347AE"/></td>
-        </tr>
-        </tbody>
-      </table>
+      <h4><FontAwesome name="github"/> <span style={{align:'right'}}>{item.name}</span></h4>
+      <h5><FontAwesome name="code-fork"/> <span style={{align:'right'}}>{item.lastVersion}</span></h5>
+      <Line percent={item.rollout} strokeWidth="2" strokeColor="#1347AE"/>
     </ListGroupItem>
   );
 }

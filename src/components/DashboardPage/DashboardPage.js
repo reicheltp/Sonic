@@ -10,10 +10,31 @@
 import React, {Component, PropTypes} from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './DashboardPage.scss';
+import FontAwesome from 'react-fontawesome';
+import { Line, Circle } from 'rc-progress';
 
 function ProjectItem({item}) {
+  item = {
+    name: 'company/project-awesome',
+    lastVersion: '1.2.3-beta',
+    rollout: 35,
+    date: '2017-07-23T12:23:45'
+  };
+
   return (
-    <div>{item}</div>
+    <div style={{margin: 10}}>
+      <table><tbody>
+        <tr>
+          <td><FontAwesome name="github"/> <span style={{align:'right'}}>{item.name}</span></td>
+        </tr>
+        <tr>
+          <td><FontAwesome name="code-fork"/> <span style={{align:'right'}}>{item.lastVersion}</span></td>
+        </tr>
+        <tr>
+          <td><Line percent={item.rollout} strokeWidth="4" strokeColor="#1347AE"/></td>
+        </tr>
+      </tbody></table>
+    </div>
   );
 }
 

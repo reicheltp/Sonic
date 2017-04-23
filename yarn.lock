@@ -4697,13 +4697,9 @@ ms@^0.7.1:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
 
-mute-stream@0.0.5:
+mute-stream@0.0.5, mute-stream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
-
-mute-stream@~0.0.4:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
 nan@^2.3.0:
   version "2.6.2"
@@ -5777,7 +5773,7 @@ prompt@~0.2.14:
     utile "0.2.x"
     winston "0.8.x"
 
-prop-types@^15.5.4:
+prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
@@ -5834,17 +5830,17 @@ qs@6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.1.0.tgz#ec1d1626b24278d99f0fdf4549e524e24eceeb26"
 
-qs@6.2.1, "qs@>= 0.4.0":
+qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
+
+"qs@>= 0.4.0", qs@~6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 qs@~6.3.0:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
-
-qs@~6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 query-string@^3.0.0:
   version "3.0.3"
@@ -5894,6 +5890,12 @@ raw-loader@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
 
+rc-progress@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/rc-progress/-/rc-progress-2.1.1.tgz#808cb3cd42e75cf986569d9c03ecff7158b73df4"
+  dependencies:
+    prop-types "^15.5.8"
+
 rc@^1.1.7:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.1.tgz#2e03e8e42ee450b8cb3dce65be1bf8974e1dfd95"
@@ -5914,6 +5916,12 @@ react-deep-force-update@^1.0.0:
 react-dom@0.14.7:
   version "0.14.7"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-0.14.7.tgz#973c302110b3a680c9afe69d07c623b9c0952d82"
+
+react-fontawesome@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.6.1.tgz#eddce17e7dc731aa09fd4a186688a61793a16c5c"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-proxy@^1.1.7:
   version "1.1.8"

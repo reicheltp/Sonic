@@ -28,7 +28,7 @@ const router = new Router(on => {
     return component && <App context={state.context}>{component}</App>;
   });
 
-  on('/dashboard', async ({context}) => {
+  on('/', async ({context}) => {
     context.onSetTitle('Sonic');
 
     return <DashboardPage />

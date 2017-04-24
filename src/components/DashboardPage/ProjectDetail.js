@@ -7,33 +7,37 @@ import Devices from './Devices';
 import Overview from './Overview';
 
 function renderTab(selectedTab, id) {
-  if (selectedTab == 'devices') {
-    return <Devices id={id}/>;
-  } else if (selectedTab == 'settings') {
-    return <Settings id={id}/>;
+  if (selectedTab === 'devices') {
+    return <Devices id={id} />;
+  } else if (selectedTab === 'settings') {
+    return <Settings id={id} />;
   }
   else {
-    return <Overview id={id}/>;
+    return <Overview id={id} />;
   }
 }
 
-function ProjectDetail({selectedTab, id}) {
-  const projects= [
+function ProjectDetail({ selectedTab, id }) {
+  const projects = [
     {
       id: id,
-      name: "company/myapp",
+      name: "wercker/wercker",
     },
     {
       id: id,
-      name: "company/myapp",
+      name: "awesome_company/ImportantApp",
     },
     {
       id: id,
-      name: "company/myapp",
+      name: "devops_company/MonitoringApp",
     },
     {
       id: id,
-      name: "company/myapp",
+      name: "SandraKriemann/HelloDeliveryOfThingsWorld",
+    },
+    {
+      id: id,
+      name: "wercker/wercker2",
     },
   ];
 
@@ -45,7 +49,7 @@ function ProjectDetail({selectedTab, id}) {
 
   return (
     <div>
-      <h1>{project.name} <FontAwesome name="github"/></h1>
+      <h1>{project.name} <FontAwesome name="github" /></h1>
       <Nav bsStyle="tabs" activeKey={selectedTab}>
         <NavItem eventKey="overview" href={`/projects/${project.id}`}>Overview</NavItem>
         <NavItem eventKey="devices" href={`/projects/${project.id}/devices`}>Devices</NavItem>

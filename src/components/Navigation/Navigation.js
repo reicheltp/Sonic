@@ -13,13 +13,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Navigation.scss';
 import Link from '../Link';
 import {gql, graphql} from 'react-apollo';
+import Cookies from 'js-cookie';
 
 function Navigation({className, data}) {
   console.log(data);
 
   setTimeout(() => {
     data.refetch();
-  }, 200);
+  }, 100);
 
   return (
     <div className={cx(s.root, className)} role="navigation">
@@ -28,8 +29,14 @@ function Navigation({className, data}) {
       <span className={s.spacer}> | </span>
 
       { (data && data.me && data.me.fullName)
-        ? <Link className={cx(s.link, s.highlight)} to="/logout">Sign out</Link>
-        : <Link className={cx(s.link, s.highlight)} to="/auth/github">Sign in with Github</Link>
+        ? <Link className={cx(s.link, s.highlight)} onClick={() => {
+              window.location.reload();
+            console.log('removed the cookies');
+        }} to="/logout" refresh>Sign out</Link>
+        : <Link className={cx(s.link, s.highlight)} to="/auth/github/" onClick={() => {
+              window.location.reload();
+        }
+        } refresh>Sign in with Github</Link>
       }
     </div>
   );

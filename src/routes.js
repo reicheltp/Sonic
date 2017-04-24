@@ -53,6 +53,20 @@ const router = new Router(on => {
     return <DashboardPage projectId={params.id} selectedTab={params.tab}/>
   });
 
+  on('/logout', ({context}) => {
+    window.location.reload();
+    return <App context={context} error><div>
+      <h1>Sign Out</h1>
+    </div></App>
+  });
+
+  on('/auth/github', ({context}) => {
+    window.location.reload();
+    return <App context={context} error><div>
+      <h1>Sign In with Github</h1>
+    </div></App>
+  });
+
   routes.forEach(route => {
     on(route.path, route.action);
   });

@@ -6,6 +6,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+/* @flow */
 
 import 'babel-polyfill';
 import path from 'path';
@@ -24,7 +25,7 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics, databaseUrl } from './config';
 import mongoose from 'mongoose';
-import {ApolloClient, ApolloProvider} from 'react-apollo';
+import {ApolloClient, ApolloProvider, createNetworkInterface} from 'react-apollo';
 
 mongoose.connect(databaseUrl);
 
@@ -56,7 +57,7 @@ server.use(expressJwt({
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 }));
 server.use(passport.initialize());
-//server.use(passport.session());
+server.use(passport.session());
 
 passport.serializeUser((user, done) =>{
   done(null, user._id);
@@ -71,6 +72,7 @@ passport.deserializeUser((id, done) =>{
 
 server.get('/logout', function(req, res){
   req.logout();
+  res.clearCookie('id_token');
   res.redirect('/');
 });
 
@@ -110,9 +112,19 @@ server.get('*', async (req, res, next) => {
       data.trackingId = analytics.google.trackingId;
     }
 
+    console.log(JSON.stringify(req.header('id_token')));
+
+    const networkInterface = createNetworkInterface({
+      credentials: 'same-origin',
+      uri: '/graphql',
+      headers: {
+        Cookie: req.header('id_token')
+      }
+    });
+
     const client = new ApolloClient({
       ssrMode: true,
-
+      networkInterface: networkInterface,
     });
 
     const css = [];

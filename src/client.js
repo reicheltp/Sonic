@@ -13,11 +13,26 @@ import React from 'react';
 import FastClick from 'fastclick';
 import Router from './routes';
 import Location from './core/Location';
-import {addEventListener, removeEventListener} from './core/DOMUtils';
-import {ApolloClient, ApolloProvider} from 'react-apollo';
+import { addEventListener, removeEventListener } from './core/DOMUtils';
+import { ApolloClient, createNetworkInterface } from 'react-apollo';
+
+function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+const networkInterface = createNetworkInterface('/graphql', {
+  credentials: 'same-origin',
+  uri: '/graphql',
+  headers: {
+    Cookie: getCookie("id_token")
+  }
+});
 
 const client = new ApolloClient({
-  connectToDevTools: true
+  connectToDevTools: true,
+  networkInterface: networkInterface,
 });
 
 let cssContainer = document.getElementById('css');

@@ -14,24 +14,24 @@ function DeviceItem({item}) {
       <td>{item.device}</td>
       <td>{item.deviceType}</td>
       <td>{item.version}</td>
-      <td/>
+      <td />
     </tr>
   );
 }
 
-function Devices ({}) {
-  const devices = [1,2,3,4].map(itm => {
+function Devices({}) {
+  const devices = [1, 2, 3, 4].map(itm => {
     return {
       id: itm,
       name: `Device ${itm}`,
       version: '1.2.3-alpha',
       device: 'Android',
-      deviceType: 'Galaxy S7'
+      deviceType: 'Galaxy S7',
     };
   });
 
   return (
-    <Table containerStyle={{width:'100%'}} striped hover>
+    <Table containerStyle={{ width: '100%' }} striped hover>
       <tbody>
         <tr>
           <th>#</th>
@@ -39,9 +39,9 @@ function Devices ({}) {
           <th>OS</th>
           <th>Type</th>
           <th>Version</th>
-          <th style={{maxWidth: '99%'}}/>
+          <th style={{ maxWidth: '99%' }} />
         </tr>
-        {devices.map(itm => <DeviceItem item={itm}/>)}
+        {devices.map(itm => <DeviceItem item={itm} />)}
       </tbody>
     </Table>
   );

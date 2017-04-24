@@ -89,6 +89,26 @@ server.get('/auth/github/callback',
     res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
     res.redirect('/');
   });
+
+server.post('/deployment', function(req, res){
+  if(!req.user){
+    return;
+  }
+
+  const {
+    project,
+    branch,
+    projectName
+  } = req.body;
+
+  let sys = require('sys');
+  let exec = require('child_process').exec;
+  function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+  exec(`bash ./deploy.sh ${req.user.githubName}/${project} ${branch} ${projectName} ${req} ${req.user.githubToken}`, puts);
+});
+
+
 //
 // Register API middleware
 // -----------------------------------------------------------------------------

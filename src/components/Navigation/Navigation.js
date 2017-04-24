@@ -13,23 +13,33 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Navigation.scss';
 import Link from '../Link';
 import {gql, graphql} from 'react-apollo';
-import Cookies from 'js-cookie';
+import {Image} from 'react-bootstrap';
 
 function Navigation({className, data}) {
   console.log(data);
 
   setTimeout(() => {
     data.refetch();
-  }, 100);
+  }, 50);
 
   return (
     <div className={cx(s.root, className)} role="navigation">
-      <Link className={s.link} to="/about">About</Link>
+      {data.me
+        ? <span className={s.link}>
+          <Image src={data.me.pic} circle style={{height:35, marginTop: -5, marginBottom: -5}}/>
+          &nbsp;&nbsp;{data.me.fullName}
+        </span>
+        : <span>
+        <Link className={s.link} to="/about">About</Link>
       <Link className={s.link} to="/contact">Contact</Link>
+      </span>
+      }
+
       <span className={s.spacer}> | </span>
 
       { (data && data.me && data.me.fullName)
-        ? <Link className={cx(s.link, s.highlight)} onClick={() => {
+        ?
+        <Link className={cx(s.link, s.highlight)} onClick={() => {
               window.location.reload();
             console.log('removed the cookies');
         }} to="/logout" refresh>Sign out</Link>

@@ -49,7 +49,6 @@ class ProjectList extends Component {
   }
 
   saveNewProject(itm){
-    //TODO: save project
   }
 
   render() {

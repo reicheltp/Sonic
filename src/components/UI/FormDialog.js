@@ -26,8 +26,8 @@ class FormDialog extends React.Component {
   }
 
   componentWillMount() {
-    React.Children.forEach(this.props.children,
-      child => child.props.id && child.props.defaultValue
+    this.props && React.Children.forEach(this.props.children,
+      child => child && child.props && child.props.id && child.props.defaultValue
       && this.setState({
         [child.props.id]: child.props.defaultValue,
       }));
@@ -53,7 +53,7 @@ class FormDialog extends React.Component {
       },
       onSave = () => {
       },
-    } = this.props;
+    } = this.props || {};
 
     return (
       <Modal show={show} onHide={onHide} dialogClassName="inmodal">
@@ -63,7 +63,7 @@ class FormDialog extends React.Component {
         <Modal.Body>
           <form>
             {React.Children.map(children,
-              (child) => React.cloneElement(child, {
+              (child) => child && React.cloneElement(child, {
                 onChange: this.handleInputChange,
               }))
             }
@@ -71,7 +71,10 @@ class FormDialog extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={onHide}>Close</Button>
+          {
+           saveTitle &&
           <Button bsStyle="primary" onClick={() => onSave(this.state)} disabled={!canSave}>{saveTitle}</Button>
+          }
         </Modal.Footer>
       </Modal>
     );

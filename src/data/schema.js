@@ -20,6 +20,7 @@ import {
   RepoType,
 } from './types';
 import Octokat from 'octokat';
+import {Project} from '../core/db';
 
 const me = {
   type: UserType,
@@ -35,10 +36,15 @@ const me = {
   },
 };
 
-const repos = {
+const projects = {
   type: new ListType(ProjectType),
-  resolve({ request }) {
+  async resolve({ request }) {
+    if(!request.user){
+      return;
+    }
 
+    let result = await Project.find({userId: request.user.id});
+    return result;
   }
 };
 
@@ -69,7 +75,7 @@ const schema = new Schema({
     name: 'Query',
     fields: {
       me,
-      repos,
+      projects,
       repos,
     },
   }),

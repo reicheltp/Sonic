@@ -17,7 +17,9 @@ import {
   ProjectType,
   DeploymentType,
   DeviceType,
+  RepoType,
 } from './types';
+import Octokat from 'octokat';
 
 const me = {
   type: UserType,
@@ -33,10 +35,32 @@ const me = {
   },
 };
 
-const projects = {
+const repos = {
   type: new ListType(ProjectType),
   resolve({ request }) {
 
+  }
+};
+
+const repos = {
+  type: new ListType(RepoType),
+  async resolve({ request }) {
+    if(!request.user){
+      return;
+    }
+
+    let octo = new Octokat({token: request.user.githubToken});
+    let result = await octo.users(request.user.githubName).repos.fetch();
+
+    return result.items.map(val => {
+      return {
+        id: val.id,
+        name: val.fullName,
+        branches: ['master', 'develop'],
+        gitUrl: val.gitUrl,
+        htmlUrl: val.htmlUrl
+      };
+    });
   }
 };
 
@@ -45,7 +69,8 @@ const schema = new Schema({
     name: 'Query',
     fields: {
       me,
-      projects
+      repos,
+      repos,
     },
   }),
 });

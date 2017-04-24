@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   fullName: String,
   pic: String,
   githubToken: String,
+  githubName: String,
   githubRefresh: String,
 });
 

@@ -11,6 +11,7 @@ import {
   ListGroupItem
 } from 'react-bootstrap';
 import FormDialog from '../UI/FormDialog';
+import {gql, graphql} from 'react-apollo';
 
 class NewProjectWizard extends React.Component {
   constructor(){
@@ -18,23 +19,23 @@ class NewProjectWizard extends React.Component {
     this.state = {};
   }
 
+  componentDidMount(){
+    this.data.refetch();
+  }
+
   render() {
     const {
       show, onHide, onSave
     } = this.props;
 
-    const projects = [1,2,3].map(itm => {
-      return {
-        id: itm,
-        name: "mycompany/Project",
-        branches: ['develop', 'master'],
-      };
-    });
+    const {
+      repos
+    } = this.props.data;
 
     console.log(this.state);
 
     const branches = this.state.project >= 0
-      ? projects[this.state.project].branches
+      ? repos.find(val => val.id == this.state.project).branches
       : false;
 
     return (
@@ -47,10 +48,10 @@ class NewProjectWizard extends React.Component {
       >
         <FormDialog.Group
           id="project" label="Project"
-          componentClass="select"
+          componentClass="select" disabled={!repos}
         >
           <option value="-1">Select Project ...</option>
-          { projects.map(itm => <option value={itm.id}>{itm.name}</option>) }
+          { repos && repos.map(itm => <option value={itm.id}>{itm.name}</option>) }
         </FormDialog.Group>
 
         <FormDialog.Group
@@ -66,4 +67,8 @@ class NewProjectWizard extends React.Component {
   }
 }
 
-export default NewProjectWizard;
+const FetchData = gql`query{ repos { id, name, branches, __typename } }`;
+
+const NewProjectWizardWithData = graphql(FetchData)(NewProjectWizard);
+
+export default NewProjectWizardWithData;

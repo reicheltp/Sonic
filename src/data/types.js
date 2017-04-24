@@ -53,3 +53,12 @@ export const ProjectType = new ObjectType({
     devices: {type: new ListType(DeviceType)},
   }
 });
+
+export const RepoType = new ObjectType({
+  name: "Repo",
+  fields: {
+    id: {type: IdType},
+    name: {type: StringType},
+    branches: {type: new ListType(StringType)}
+  }
+});

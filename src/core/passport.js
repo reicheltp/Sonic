@@ -41,7 +41,7 @@ passport.use(new GitHubStrategy({
       let user = new User({
         githubToken: accessToken,
         githubRefresh: refreshToken,
-        githubId: profile.id,
+        githubName: profile._json.login,
         fullName: profile.displayName,
         pic: profile._json.avatar_url,
         githubName: profile.username

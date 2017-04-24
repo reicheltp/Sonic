@@ -4,8 +4,10 @@ import {Line, Circle} from 'rc-progress';
 import {
   ListGroup, ListGroupItem, Col,
   FormGroup, InputGroup,
-  Glyphicon, FormControl, Row
+  Glyphicon, FormControl, Row,
+  Button,
 } from 'react-bootstrap';
+import NewProjectWizard from './NewProjectWizard';
 
 function SearchBar({}) {
   return (
@@ -38,25 +40,53 @@ function ProjectItem({item}) {
   );
 }
 
-function ProjectList() {
-  const projects = [1, 2, 3, 4];
+class ProjectList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showNew: false,
+    }
+  }
 
-  return (
-    <div>
-      <Row>
-        <div style={{margin:15, marginBottom:60, marginTop:20}}>
-          <SearchBar/>
-        </div>
-      </Row>
-      <Row>
-        <ListGroup>
-          {projects.map(itm =>
-            <ProjectItem item={itm}/>
-          )}
-        </ListGroup>
-      </Row>
-    </div>
-  );
+  saveNewProject(itm){
+    //TODO: save project
+  }
+
+  render() {
+    const {
+      showNew,
+    } = this.state;
+    const projects = [1, 2, 3, 4];
+
+    return (
+      <div>
+        <Row>
+          <div style={{margin:15, marginBottom:60, marginTop:20, display:'flex', flowDirection:'row'}}>
+            <div style={{flex:1, marginRight:10}}>
+              <SearchBar/>
+            </div>
+            <div>
+              <Button bsStyle="primary" onClick={() => this.setState({showNew: true})}>Add Project</Button>
+            </div>
+          </div>
+        </Row>
+        <Row>
+          <ListGroup>
+            {projects.map(itm =>
+              <ProjectItem item={itm}/>
+            )}
+          </ListGroup>
+        </Row>
+
+        <NewProjectWizard
+          show={showNew}
+          onHide={() => this.setState({ showNew: false })}
+          onSave={itm => this.saveNewProject(itm)}
+        />
+      </div>
+    );
+  }
+
 }
 
 export default ProjectList;

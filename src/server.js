@@ -77,7 +77,7 @@ server.get('/logout', function(req, res){
 });
 
 server.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }));
+  passport.authenticate('github', { scope: [ 'user:email', 'public_repo' ] }));
 
 server.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),

@@ -29,6 +29,7 @@ passport.use(new GitHubStrategy({
     // console.log(JSON.stringify(profile));
 
     console.log("Got response: " + JSON.stringify(profile));
+    console.log("\nGot token: " + accessToken);
 
 
     User.find({ githubId: profile.id }, function (err, usr) {
@@ -38,6 +39,8 @@ passport.use(new GitHubStrategy({
       }
 
       let user = new User({
+        githubToken: accessToken,
+        githubRefresh: refreshToken,
         githubId: profile.id,
         fullName: profile.displayName,
         pic: profile._json.avatar_url,

@@ -23,14 +23,6 @@ function SearchBar({}) {
 }
 
 function ProjectItem({item}) {
-  item = {
-    id: item,
-    name: 'company/project-awesome',
-    lastVersion: '1.2.3-beta',
-    rollout: 35,
-    date: '2017-07-23T12:23:45'
-  };
-
   return (
     <ListGroupItem href={`/projects/${item.id}`} key={item.id}>
       <h4><FontAwesome name="github"/> <span style={{align:'right'}}>{item.name}</span></h4>
@@ -48,14 +40,22 @@ class ProjectList extends Component {
     }
   }
 
-  saveNewProject(itm){
+  saveNewProject(itm) {
   }
 
   render() {
     const {
       showNew,
     } = this.state;
-    const projects = [1, 2, 3, 4];
+    const projects = [1, 2, 3, 4].map(id => {
+      return {
+        id: id,
+        name: 'company/project-awesome',
+        lastVersion: '1.2.3-beta',
+        rollout: 35,
+       // date: '2017-07-23T12:23:45'
+      }
+    });
 
     return (
       <div>

@@ -15,14 +15,29 @@ function renderTab(selectedTab, id) {
   else {
     return <Overview id={id}/>;
   }
-
 }
 
 function ProjectDetail({selectedTab, id}) {
-  const project = {
-    id: id,
-    name: "company/myapp",
-  };
+  const projects= [
+    {
+      id: id,
+      name: "company/myapp",
+    },
+    {
+      id: id,
+      name: "company/myapp",
+    },
+    {
+      id: id,
+      name: "company/myapp",
+    },
+    {
+      id: id,
+      name: "company/myapp",
+    },
+  ];
+
+  const project = projects[id];
 
   if (selectedTab === undefined) {
     selectedTab = 'overview';
